@@ -1,33 +1,23 @@
-import * as React from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
+import React from 'react';
+import { View, Text, Image, ScrollView, TextInput,StyleSheet,Platform } from 'react-native';
+import ReactTabs  from "./src/Tabs";
 
-const MusicRoute = () => <Text>Music</Text>;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 0,
+  },
+});
 
-const AlbumsRoute = () => <Text>Albums</Text>;
-
-const RecentsRoute = () => <Text>Recents</Text>;
-
-const ReactTabs = (props) => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'music', title: 'Music', icon: { uri: 'https://img.icons8.com/material-sharp/24/000000/cloud-network.png' } },
-    { key: 'albums', title: 'Albums', icon: { uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' } },
-    { key: 'recents', title: 'Recents', icon: { uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }},
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
-    albums: AlbumsRoute,
-    recents: RecentsRoute,
-  });
-
+const App = () => {
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-    />
+    <View style={[styles.container, {
+      flexDirection: Platform.OS!='web'?"column":"row"
+    }]}>
+      <View style={{ flex: 1}}/>
+      <View style={{ flex: 11}}><ReactTabs /></View>      
+    </View>
   );
-};
+}
 
-export default ReactTabs;
+export default App;
